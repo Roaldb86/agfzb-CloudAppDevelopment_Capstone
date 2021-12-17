@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% extends 'djangoapp/base.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}<title>Contact us</title>{% endblock title %}
+
+</head>
+<body>
+{% block content %}
+    <br><br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <address>
+                    <strong>Roalds car dealership.</strong><br>
+                    1234 Example Street<br>
+                    Antartica, Example 0987<br>
+                    <abbr title="Phone">P:</abbr> (123) 456-7890
+                </address>
+
+                <address>
+                    <strong>Full Name</strong><br>
+                    <a href="mailto:#">roald@car.com</a>
+                </address>
+            </div>
+        </div>
+    </div>
+    </body>
+{% endblock content %}
+</body>
+</html>

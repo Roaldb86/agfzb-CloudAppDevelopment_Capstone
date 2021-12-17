@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'djangoapp/style.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css"
+          rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+    {% block title %}{% endblock title %}
+</head>
+<body>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'djangoapp:index' %}">Home</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <a class="navbar-brand" href="{% url 'djangoapp:about' %}">About us</a>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <a class="navbar-brand" href="{% url 'djangoapp:contact' %}">Contact us</a>
+        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if user.is_authenticated %}
+                            <li>
+                                <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
+                                <a class="btn btn-link" href="{% url 'djangoapp:index' %}">Logout</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <form class="form-inline" action="{% url 'djangoapp:index' %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Username" name="username">
+                                        <input type="password" class="form-control" placeholder="Username" name="psw">
+                                        <button class="btn btn-primary" type="submit">Login</button>
+                                        <a class="btn btn-link" href="{% url 'djangoapp:index' %}">Sign Up</a>
+                                    </div>
+                                </form>
+                            </li>
+                        {% endif %}
+                    </ul>
+    </div>
+</nav>
+{% block content %}{% endblock content %}
+</body>
+</html>
