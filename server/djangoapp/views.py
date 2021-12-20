@@ -8,8 +8,9 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from datetime import datetime
 import logging
+import requests
 import json
-
+from functions.sample.python import main
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
@@ -83,10 +84,16 @@ def registration_request(request):
 def get_dealerships(request):
     context = {}
     if request.method == "GET":
+        url = 'https://eu-gb.functions.appdomain.cloud/api/v1/web/roaldb_dev/djangoapp/dealership'
+        # Get dealers from the URL
+        response = requests.get(url, headers={'Content-Type': 'application/json'})
+        context = json.loads(response.text)
+        # Concat all dealer's short name
+        # Return a list of dealer short name
+        for i in context['rows']:
+            print(i['doc']['full_name'])
+
         return render(request, 'djangoapp/index.html', context)
-
-
-
 
 # Create a `get_dealer_details` view to render the reviews of a dealer
 # def get_dealer_details(request, dealer_id):
