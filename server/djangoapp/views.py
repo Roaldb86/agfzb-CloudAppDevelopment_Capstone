@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
-# from .models import related models
+from .models import CarDealer
 # from .restapis import related methods
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
@@ -90,8 +90,8 @@ def get_dealerships(request):
         context = json.loads(response.text)
         # Concat all dealer's short name
         # Return a list of dealer short name
-        for i in context['rows']:
-            print(i['doc']['full_name'])
+        #for i in context['rows']:
+         #   ['doc']['full_name'])
 
         return render(request, 'djangoapp/index.html', context)
 
