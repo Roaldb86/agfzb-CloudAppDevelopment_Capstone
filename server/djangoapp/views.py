@@ -10,7 +10,7 @@ from datetime import datetime
 import logging
 import requests
 import json
-from functions.sample.python import main
+
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
