@@ -4,10 +4,11 @@ from django.utils.timezone import now
 
 class CarMake(models.Model):
     name = models.CharField(max_length=30)
-    description = models.CharField(max_length=300)
+    description = models.CharField(max_length=300, default='Best carmake')
 
     def __str__(self):
         return self.name
+
 
 class CarModel(models.Model):
     SEDAN = 'sedan'
@@ -15,11 +16,11 @@ class CarModel(models.Model):
     WAGON = 'wagon'
     OTHERS = 'others'
     CAR_CHOICES = [(SEDAN, "Sedan"), (SUV, 'SUV'), (WAGON, 'Wagon'), (OTHERS, 'Others')]
-    carmake = models.ForeignKey(CarMake, null= True, on_delete=models.CASCADE)
-    name = models.CharField(null= False, max_length=30)
+    carmake = models.ForeignKey(CarMake, null=True, on_delete=models.CASCADE)
+    name = models.CharField(null=False, max_length=30)
     dealerid = models.IntegerField(null=True)
-    cartype = models.CharField(null= False, max_length=20, choices=CAR_CHOICES, default=SEDAN)
-    year = models.DateField(null= True)
+    cartype = models.CharField(null=False, max_length=20, choices=CAR_CHOICES, default=SEDAN)
+    year = models.DateField(null=True)
 
     def __str__(self):
         return self.name
