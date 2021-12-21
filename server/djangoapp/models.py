@@ -10,11 +10,15 @@ class CarMake(models.Model):
         return self.name
 
 class CarModel(models.Model):
-    CAR_CHOICES = ['SUV', 'SEDAN', 'WAGON', 'SPORT']
-    carmake = models.ForeignKey(CarMake, null=True, on_delete=models.CASCADE)
+    SEDAN = 'sedan'
+    SUV = 'suv'
+    WAGON = 'wagon'
+    OTHERS = 'others'
+    CAR_CHOICES = [(SEDAN, "Sedan"), (SUV, 'SUV'), (WAGON, 'Wagon'), (OTHERS, 'Others')]
+    carmake = models.ForeignKey(CarMake, null= True, on_delete=models.CASCADE)
     name = models.CharField(null= False, max_length=30)
     dealerid = models.IntegerField(null=True)
-    cartype = models.CharField(null= False, max_length=20, choices= CAR_CHOICES, default='SEDAN')
+    cartype = models.CharField(null= False, max_length=20, choices=CAR_CHOICES, default=SEDAN)
     year = models.DateField(null= True)
 
     def __str__(self):
