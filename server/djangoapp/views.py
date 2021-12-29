@@ -104,10 +104,10 @@ def get_dealer_details(request, dealer_id):
 
 def add_review(request, dealer_id):
     if request.method == "GET":
-        context = {'dealer_id': dealer_id}
         url = f'https://eu-gb.functions.appdomain.cloud/api/v1/web/roaldb_dev/djangoapp/dealership?dealerId={dealer_id}'
         # Get dealers from the URL
         context = {
+            "dealer_id": dealer_id,
             "cars": models.CarModel.objects.all(),
             "dealers": restapis.get_dealers_from_cf(url),
         }
