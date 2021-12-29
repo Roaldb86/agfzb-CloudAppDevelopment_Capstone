@@ -10,6 +10,8 @@ from datetime import datetime
 import logging
 import requests
 import json
+from . import models
+from . import restapis
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -103,6 +105,13 @@ def get_dealer_details(request, dealer_id):
 def add_review(request, dealer_id):
     if request.method == "GET":
         context = {'dealer_id': dealer_id}
+        url = f'https://eu-gb.functions.appdomain.cloud/api/v1/web/roaldb_dev/djangoapp/dealership?dealerId={dealer_id}'
+        # Get dealers from the URL
+        context = {
+            "cars": models.CarModel.objects.all(),
+            "dealers": restapis.get_dealers_from_cf(url),
+        }
+
         return render(request, 'djangoapp/add_review.html', context)
 
     elif request.method == "POST":
@@ -115,12 +124,6 @@ def add_review(request, dealer_id):
                 "dealership": dealer_id,
                 "review": form["content"],
                 }
-            # if form.get("purchasecheck"):
-            #     review["purchase_date"] = datetime.strptime(form.get("purchasedate"), "%m/%d/%Y").isoformat()
-            #     car = models.CarModel.objects.get(pk=form["car"])
-            #     review["car_make"] = car.carmake.name
-            #     review["car_model"] = car.name
-            #     review["car_year"]= car.year.strftime("%Y")
 
             json_payload = {"review": review}
             print(json_payload)
