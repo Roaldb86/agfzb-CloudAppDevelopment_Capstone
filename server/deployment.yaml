@@ -27,5 +27,5 @@ spec:
         - containerPort: 8000
           protocol: TCP
       restartPolicy: Always
-    replicas: 1
+  replicas: 1
 
