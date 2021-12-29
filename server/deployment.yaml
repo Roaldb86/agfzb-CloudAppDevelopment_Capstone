@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     run: dealership
-  name: dealership
+    name: dealership
 spec:
   replicas: 1
   selector:
@@ -27,5 +27,5 @@ spec:
         - containerPort: 8000
           protocol: TCP
       restartPolicy: Always
-  replicas: 1
+    replicas: 1
 
